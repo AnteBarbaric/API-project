@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30611.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RESTfull_api_client", "RESTfull_api_client\RESTfull_api_client.csproj", "{BB4FAD28-BE33-4FF2-A602-F7DA1C2912F7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BB4FAD28-BE33-4FF2-A602-F7DA1C2912F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB4FAD28-BE33-4FF2-A602-F7DA1C2912F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB4FAD28-BE33-4FF2-A602-F7DA1C2912F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB4FAD28-BE33-4FF2-A602-F7DA1C2912F7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F4B74D28-ACC4-44C1-A421-8BCD97F09881}
+	EndGlobalSection
+EndGlobal

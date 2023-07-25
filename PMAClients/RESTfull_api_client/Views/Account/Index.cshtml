@@ -1,0 +1,194 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+@section PageLevelScripts {
+    <environment include="Development">
+        <script src="~/lib/pma/pma.account.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/lib/pma/pma.account.js"></script>
+    </environment>
+}
+<body style="background-image: url('../hajduk/hs2.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        overflow-x:hidden;">
+</body>
+
+        <div class="card">
+            <div class="card-header">
+                Accounts
+            </div>
+            <div class="card-body">
+                <h5>Filters</h5>
+                <div class="row">
+                    <div class="col-12 col-md-4">
+                        <div class="input-group">
+                            <input id="filterUsername" type="search" class="form-control rounded" placeholder="Username like this pattern" aria-label="Search"
+                                   aria-describedby="search-addon" />
+                            <button onclick="filterChanged(this)" type="button" class="btn btn-outline-primary">Search</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="filterLanguageId">Language</label>
+                            </div>
+                            <select class="custom-select" id="filterLanguageId" onchange="filterChanged(this)">
+                                <option value="0" selected>Any language</option>
+                                <option value="hr">Croatian</option>
+                                <option value="en">English</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="filterUserRoleId">Role</label>
+                            </div>
+                            <select class="custom-select" id="filterUserRoleId" onchange="filterChanged(this)">
+                                <option value="0" selected>All roles</option>
+                                <option value="1">Administrator</option>
+                                <option value="2">Member</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="filterStateId">Status</label>
+                            </div>
+                            <select class="custom-select" id="filterStateId" onchange="filterChanged(this)">
+                                <option value="0" selected>All status</option>
+                                <option value="A">Active</option>
+                                <option value="I">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                    <h5 class="card-title">User accounts table</h5>
+                    <div id="mainAjaxLoader" class="row justify-content-center" style="display: none;">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    <div id="mainMessage" class="alert alert-danger" style="display: none">
+
+                    </div>
+                    <table id="myTable" class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>First name</th>
+                                <th>Last name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Language</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                <th colspan="2">
+                                    <button type="button" class="btn btn-outline-info btn-sm" onclick="addNewAccount()">Add new account</button>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    <div class="performance"></div>
+                    <div class="row table-paging-container">
+                        <div class="col-12 col-md-8"><div id="accountpager"></div></div>
+                        <div class="col-6 col-md-4"><partial name="_RowsPerPage" /></div>
+                    </div>
+                </div>
+        </div>
+
+        <div class="modal" id="accountModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">User account</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <form style="margin-left: 60px; margin-right: 60px;">
+                            <div class="form-group">
+                                <label for="userLoginId">Id:</label>
+                                <input disabled="disabled" type="text" class="form-control form-control-sm" id="userLoginId">
+                            </div>
+                            <div class="form-group">
+                                <label for="username">Username*:</label>
+                                <input type="text" class="form-control form-control-sm" id="username">
+                            </div>
+                            <div id="passwordGroup" class="form-group">
+                                <label for="password">Password*:</label>
+                                <input type="text" class="form-control form-control-sm" id="password">
+                            </div>
+                            <div class="form-group">
+                                <label for="firstName">First name:</label>
+                                <input type="text" class="form-control form-control-sm" id="firstName">
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last name:</label>
+                                <input type="text" class="form-control form-control-sm" id="lastName">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email*:</label>
+                                <input type="text" class="form-control form-control-sm" id="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone:</label>
+                                <input type="text" class="form-control form-control-sm" id="phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="selLanguage">Language:</label>
+                                <select class="form-control form-control-sm" id="selLanguage">
+                                    <option value="0">-- select one --</option>
+                                    <option value="hr">Croatian</option>
+                                    <option value="en">English</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="selUserRole">User role*:</label>
+                                <select class="form-control form-control-sm" id="selUserRole">
+                                    <option value="0">-- select one --</option>
+                                    <option value="1">Administrator</option>
+                                    <option value="2">User</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="selState">Status*:</label>
+                                <select class="form-control form-control-sm" id="selState">
+                                    <option value="0">-- select one --</option>
+                                    <option value="A">Active</option>
+                                    <option value="I">Inactive</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <div id="modalAjaxLoader" class="spinner-border text-primary" role="status" style="display: none">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="offset-md-1 col-md-10">
+                            <div id="modalMessage" class="alert alert-danger" style="display:none;">Ovo je poruka o grešci</div>
+                        </div>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="saveData()">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>

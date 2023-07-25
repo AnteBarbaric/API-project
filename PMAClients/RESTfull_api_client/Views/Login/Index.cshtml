@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Login";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - HNK Hajduk</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/pma/pma.common.js" asp-append-version="true"></script>
+    <script src="~/lib/pma/pma.login.js" asp-append-version="true"></script>
+</head>
+<body>
+    <form style="margin-left: 200px; max-width: 450px;">
+        <h1>@ViewData["Title"]</h1>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="email" class="form-control" id="username" aria-describedby="emailHelp" placeholder="Enter your username">
+            <small id="emailHelp" class="form-text text-muted">We are 100% safe page.</small>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Password">
+        </div>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="keepMeSignedIn">
+            <label class="form-check-label" for="keepMeSignedIn">This is private PC</label>
+        </div>
+        <div id="message" class="alert alert-danger" role="alert" style="display: none;">
+            This is a danger alert—check it out!
+        </div>
+        <button type="button" onclick="postLogin();" class="btn btn-primary">Sign me</button>
+    </form>
+</body>
+</html>
